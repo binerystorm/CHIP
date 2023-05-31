@@ -26,4 +26,5 @@ typedef struct {
 } Trace;
 
 Pulse pulse_init(Type *loc);
+void circuit_init(Trace *traces, const size_t *lens, const size_t n, Type *data);
 void trace_pulse(Trace *trace);
