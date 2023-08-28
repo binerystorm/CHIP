@@ -13,7 +13,6 @@ void circuit_init(Trace *traces, const size_t *lens, const size_t n, Type *data)
     for(size_t i = 0; i < n; i++)
     {
         size_t current_len = lens[i];
-
         traces[i] = {
             .start = cur,
             .len = current_len,
@@ -21,16 +20,14 @@ void circuit_init(Trace *traces, const size_t *lens, const size_t n, Type *data)
             .pulsing = true,
         };
         cur += current_len;
-
     }
-
 }
 
 void trace_pulse(Trace *trace)
 {
     Pulse *pulse = &(trace->pulse);
 
-    if(!(pulse->start < trace->start + trace->len)){
+    if((pulse->start > trace->start + trace->len)){
         trace->pulsing = false;
         pulse->start = trace->start;
         pulse->end = trace->start;
@@ -48,5 +45,4 @@ void trace_pulse(Trace *trace)
         *(pulse->start) = off_state;
         (pulse->start)++;
     }
-    
 }
