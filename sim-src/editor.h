@@ -122,7 +122,7 @@ void UpdateState(State *state)
     GuiGroupBox(state->layoutRecs[0], state_boxText);
     GuiToggleGroup(state->layoutRecs[1], state_pickerText, &state->state_pickerActive);
     state->savePressed = GuiButton(state->layoutRecs[2], saveText); 
-    GuiSlider(state->layoutRecs[3], speedText, NULL, &state->speedValue, 0, 100);
+    GuiSlider(state->layoutRecs[3], speedText, NULL, &state->speedValue, 0, 255);
 }
 
 #endif // GUI_EDITOR_IMPLEMENTATION
