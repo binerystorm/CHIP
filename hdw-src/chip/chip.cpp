@@ -63,37 +63,6 @@ void chip_init(Chip *chip, size_t caps[CHIP_ELEMS], Type *data, size_t len)
 //        chip->glue2.data[i] = PINK;
 //}
 
-int16_t clamp(const int16_t v, const int min, const int max)
-{
-    if(v <= min) return min;
-    else if(v >= max) return max;
-    else return v;
-}
-
-int g_max(int a, int b, int c)
-{
-    a = (a > b) ? a : b;
-    a = (a > c) ? a : c;
-    return a;
-}
-
-void V2f_lerp(const V2f *v1, V2f *v2, float co)
-{
-    if(co > 0){
-        float dx = ((v1->x - v2->x)/co);
-        float dy = ((v1->y - v2->y)/co);
-        v2->x += dx;
-        v2->y += dy;
-    }
-}
-
-void float_lerp(const float *f1, float *f2, float co)
-{
-    if(co > 0){
-        *f2 += (*f1 - *f2)/co;
-    }
-}
-
 void sec_lerp_update(const V2f *target, Section *sec, float co)
 {
     V2f_lerp(target, &(sec->color_vec), co);
@@ -136,3 +105,4 @@ Type gradient(float val)
     uint8_t b = clamp(roundf(-c * val + B + 127.5), 0, 255);
     return Gen_Color(r, g, b);
 }
+

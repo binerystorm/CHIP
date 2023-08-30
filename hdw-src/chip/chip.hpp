@@ -5,6 +5,12 @@
 //#include <assert.h>
 //#include <stdlib.h>
 //#include <raylib.h>
+
+#ifndef _CHIP_H_
+#define _CHIP_H_
+
+#include "math.hpp"
+
 #define DATACAP 37
 #define CHIPCAP 6
 #define WIRECAP 15
@@ -19,10 +25,6 @@
 //typedef Color Type;
 typedef CRGB Type;
 
-typedef struct {
-    float x;
-    float y;
-} V2f;
 
 typedef struct {
     Type *data;
@@ -44,15 +46,12 @@ typedef struct {
 
 void chip_init(Chip *chip, size_t caps[4], Type *data, size_t len);
 //void chip_fill_colors(Chip *chip);
-Type gradient(float val);
-int16_t clamp(const int16_t v, const int min, const int max);
-int g_max(int a, int b, int c);
-void V2f_lerp(const V2f *v1, V2f *v2, float co);
-void lerp_update(const V2f *target, Section *sec, float co);
-void float_lerp(const float *f1, float *f2, float co);
+// void lerp_update(const V2f *target, Section *sec, float co);
 void sec_lerp_update_1d(const float *target, Section *sec, float co);
 void sec_fill(Section *sec);
 void sec_fill_gradient(Section *sec);
 void sec_clear(Section *sec);
 void sec_lerp_update(const V2f *target, Section *sec, float co);
+Type gradient(float val);
 
+#endif _CHIP_H_
