@@ -17,6 +17,7 @@ int g_max(int a, int b, int c)
 void V2f_lerp(const V2f *v1, V2f *v2, float co)
 {
     if(co > 0){
+        // pointer is used so that the values stay the same if co is 0
         float dx = ((v1->x - v2->x)/co);
         float dy = ((v1->y - v2->y)/co);
         v2->x += dx;
