@@ -1,5 +1,5 @@
 #include "./trace.h"
-Pulse pulse_init(Type *loc, size_t len){
+Pulse pulse_init(const Type *loc, const size_t len){
     return (Pulse) {
         .start = loc,
         .end = loc,
@@ -15,7 +15,7 @@ void circuit_init(Trace *traces, const size_t *lens, const size_t n, Type *data)
         size_t current_len = lens[i];
         traces[i] = {
             .start = cur,
-            .len = current_len,
+            .end = cur + current_len,
             .pulse = pulse_init(cur, (current_len > PULSE_LEN) ? PULSE_LEN : current_len),
             .pulsing = true,
         };
@@ -27,13 +27,13 @@ void trace_pulse(Trace *trace)
 {
     Pulse *pulse = &(trace->pulse);
 
-    if((pulse->start > trace->start + trace->len)){
+    if((pulse->start > trace->end)){
         trace->pulsing = false;
         pulse->start = trace->start;
         pulse->end = trace->start;
         return;
     }
-    if(pulse->end < trace->start + trace->len){
+    if(pulse->end < trace->end){
         *(pulse->end) = on_state;
         (pulse->end)++;
     }

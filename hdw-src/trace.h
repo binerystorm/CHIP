@@ -20,7 +20,8 @@ typedef struct {
 
 typedef struct {
     Type *start;
-    size_t len;
+    Type *end;
+    //size_t len;
     Pulse pulse;
     bool pulsing;
 } Trace;
