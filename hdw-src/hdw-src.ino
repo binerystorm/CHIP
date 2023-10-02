@@ -36,8 +36,7 @@ void loop()
         sec_fill_gradient(&chip.glue1);
         sec_lerp_update_1d(&(control.power_state), &chip.glue2, 315);
         sec_fill_gradient(&chip.glue2);
-        sec_lerp_update(&((V2f){255,0}), &chip.wire, 315);
-        sec_fill(&(chip.wire));
+        sec_fill_color(&(chip.wire), CRGB::Yellow);
         frame_updated = true;
     }
     // if(tick_counter % 10 == 0){

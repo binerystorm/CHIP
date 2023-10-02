@@ -96,6 +96,13 @@ void sec_fill(Section *sec)
     }
 }
 
+void sec_fill_color(Section *sec, Type color)
+{
+    for(int i = 0; i < sec->len; i++) {
+        sec->data[i] = color;
+    }
+}
+
 Type gradient(float val)
 {
     const float c = 4.0f;
