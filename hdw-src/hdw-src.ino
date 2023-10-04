@@ -36,18 +36,20 @@ void loop()
 
     control_update(&control);
     if(clock_update(&clk)){
-        FastLED.show();
         tick_counter += 1;
+        FastLED.show();
+
+        sec_fill_gradient(&chip.chip);
+        sec_fill_gradient(&chip.glue1);
+        sec_fill_gradient(&chip.glue2);
+        // sec_fill_color(&(chip.wire));
 
         if(tick_counter % 3 == 0){
-            sec_lerp_update_1d(&(control.power_state), &chip.chip, 900);
-            sec_fill_gradient(&chip.chip);
-            sec_lerp_update_1d(&(control.power_state), &chip.glue1, 675);
-            sec_fill_gradient(&chip.glue1);
-            sec_lerp_update_1d(&(control.power_state), &chip.glue2, 315);
-            sec_fill_gradient(&chip.glue2);
-            sec_lerp_update(&((V2f){255,0}), &chip.wire, 315);
-            sec_fill(&(chip.wire));
+            //int16_t heat = clamp(control.power_state, const int min, const int max);
+            sec_lerp_update(control.power_state, &chip.chip, 900.0f);
+            sec_lerp_update(control.power_state, &chip.glue1, 675.0f);
+            sec_lerp_update(control.power_state, &chip.glue2, 315.0f);
+            sec_lerp_update(50.0f, &chip.wire, 315.0f);
         }
         if(tick_counter % 10 == 0){
             Serial.println(control.power_state);
