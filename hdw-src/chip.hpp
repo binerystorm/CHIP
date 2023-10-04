@@ -48,6 +48,7 @@ void chip_init(Chip *chip, size_t caps[4], Type *data, size_t len);
 //void chip_fill_colors(Chip *chip);
 // void lerp_update(const V2f *target, Section *sec, float co);
 void sec_lerp_update(const float target, Section *sec, float co);
+void sec_fill_color(Section *sec, Type color);
 void sec_fill_gradient(Section *sec);
 void sec_clear(Section *sec);
 Type gradient(float val);

@@ -42,7 +42,7 @@ void loop()
         sec_fill_gradient(&chip.chip);
         sec_fill_gradient(&chip.glue1);
         sec_fill_gradient(&chip.glue2);
-        // sec_fill_color(&(chip.wire));
+        sec_fill_color(&(chip.wire), CRGB::Yellow);
 
         if(tick_counter % 3 == 0){
             //int16_t heat = clamp(control.power_state, const int min, const int max);
