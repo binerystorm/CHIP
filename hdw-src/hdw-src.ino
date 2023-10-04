@@ -45,11 +45,10 @@ void loop()
         sec_fill_color(&(chip.wire), CRGB::Yellow);
 
         if(tick_counter % 3 == 0){
-            //int16_t heat = clamp(control.power_state, const int min, const int max);
-            sec_lerp_update(control.power_state, &chip.chip, 900.0f);
-            sec_lerp_update(control.power_state, &chip.glue1, 675.0f);
-            sec_lerp_update(control.power_state, &chip.glue2, 315.0f);
-            sec_lerp_update(50.0f, &chip.wire, 315.0f);
+            int16_t heat = clamp(control.power_state, 0, 255 - (control.state * 125));
+            sec_lerp_update(heat, &chip.chip, 900.0f);
+            sec_lerp_update(heat, &chip.glue1, 675.0f);
+            sec_lerp_update(heat, &chip.glue2, 315.0f);
         }
         if(tick_counter % 10 == 0){
             Serial.println(control.power_state);
@@ -67,11 +66,4 @@ void loop()
             }
         }
     } 
-    // if(tick_counter % 10 == 0){
-    //     if(chip_trace.pulsing)
-    //         trace_pulse(&chip_trace);
-    //     else{
-    //         if(random(map((int)control.power_state, 0,255, 25,0)) == 0) chip_trace.pulsing = true;
-    //     }
-    // }
 }
