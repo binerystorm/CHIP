@@ -20,4 +20,4 @@ typedef struct {
 Control control_init(int stable_pin, int unstabel_pin, int power_pin);
 void control_update(Control *c);
 
-#endif _CONTROL_H_
+#endif // _CONTROL_H_

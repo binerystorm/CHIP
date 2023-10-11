@@ -11,7 +11,7 @@
 
 #include "math.hpp"
 
-#define DATACAP 37
+#define CHIP_DATACAP 37
 #define CHIPCAP 6
 #define WIRECAP 15
 #define GLUE1CAP 6
