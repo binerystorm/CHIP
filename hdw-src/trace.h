@@ -1,16 +1,21 @@
+#ifdef SIMULATION
+#include <cstddef>
+#include <stdbool.h>
+#define on_state true
+#define off_state false
+typedef bool Type;
+
+#else
 #include <Arduino.h>
-//#include <cstddef>
 #include <FastLED.h>
-
-
 #define on_state CRGB::Red
 #define off_state CRGB::Black
-//#define on_state true
-//#define off_state false
+typedef CRGB Type;
+#endif
+
+
 #define PULSE_LEN 6 // Exclusive end
 
-// typedef bool Type;
-typedef CRGB Type;
 
 typedef struct {
     Type *start;

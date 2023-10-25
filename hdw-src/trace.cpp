@@ -1,5 +1,5 @@
 #include "./trace.h"
-Pulse pulse_init(const Type *loc, const size_t len){
+Pulse pulse_init(Type *loc, const size_t len){
     return (Pulse) {
         .start = loc,
         .end = loc,
