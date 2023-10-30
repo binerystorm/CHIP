@@ -30,7 +30,7 @@ void setup()
     circuit_init(circuit, trace_lens, TRACE_COUNT, data);
 
 }
-
+// NOTE: idx 5, count 6
 void loop()
 {
 
@@ -44,7 +44,8 @@ void loop()
         sec_fill_gradient(&chip.chip);
         sec_fill_gradient(&chip.glue1);
         sec_fill_gradient(&chip.glue2);
-        sec_fill_color(&(chip.wire), CRGB::Yellow);
+        //sec_fill_color(&(chip.wire), CRGB::Yellow);
+        sec_range_fill_color(&chip.wire, 2, 6, CRGB::Yellow);
 
         if(tick_counter % 100 == 0){
             Serial.print("state: ");

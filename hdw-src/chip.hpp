@@ -25,6 +25,11 @@
 //typedef Color Type;
 typedef CRGB Type;
 
+typedef enum {
+    OK = 0,
+    OOB,
+    OFFSET_OOB,
+} SecRangeErr;
 
 typedef struct {
     Type *data;
@@ -49,6 +54,7 @@ void chip_init(Chip *chip, size_t caps[4], Type *data, size_t len);
 // void lerp_update(const V2f *target, Section *sec, float co);
 void sec_lerp_update(const float target, Section *sec, float co);
 void sec_fill_color(Section *sec, Type color);
+SecRangeErr sec_range_fill_color(Section *sec, size_t start_offset, size_t len, Type color);
 void sec_fill_gradient(Section *sec);
 void sec_clear(Section *sec);
 Type gradient(float val);

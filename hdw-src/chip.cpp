@@ -93,6 +93,17 @@ void sec_fill_color(Section *sec, Type color)
     }
 }
 
+SecRangeErr sec_range_fill_color(Section *sec, size_t start_offset, size_t len, Type color)
+{
+    if(start_offset >= sec->len) return OFFSET_OOB;
+    if(start_offset + len >= sec->len) return OOB;
+
+    for(size_t i = start_offset; i < start_offset + len; i++)
+        sec->data[i] = color;
+
+    return OK;
+}
+
 Type gradient(float val)
 {
     const float c = 4.0f;
