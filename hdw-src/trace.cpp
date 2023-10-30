@@ -23,7 +23,7 @@ void circuit_init(Trace *traces, const size_t *lens, const size_t n, Type *data)
     }
 }
 
-void trace_pulse(Trace *trace)
+void trace_pulse(Trace *trace, Type on_state)
 {
     Pulse *pulse = &(trace->pulse);
 
@@ -44,27 +44,4 @@ void trace_pulse(Trace *trace)
         return;
     }
 
-}
-void trace_pulse2(Trace *trace)
-{
-    Pulse *pulse = &(trace->pulse);
-
-    if((pulse->start >= trace->end)){
-        trace->pulsing = false;
-        pulse->start = trace->start;
-        pulse->end = trace->start;
-        return;
-    }
-    if(pulse->end < trace->end){
-        *(pulse->end) = on_state;
-        (pulse->end)++;
-    }
-    if(pulse->end - pulse->start >= pulse->len){
-        // assert((pulse->end - pulse->start) == pulse->len);
-        *(pulse->start) = off_state;
-        (pulse->start)++;
-    }else if(pulse->start > trace->start){
-        *(pulse->start) = off_state;
-        (pulse->start)++;
-    }
 }
