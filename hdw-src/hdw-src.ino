@@ -70,7 +70,7 @@ void loop()
         if(tick_counter % 10 == 0){
             for(auto &t : circuit){
                 if(t.pulsing){
-                    trace_pulse(&t);
+                    trace_pulse(&t, control.state ? CRGB::Blue : CRGB::Red);
                     if (!t.pulsing) count--;
                 }else{
                     if(count <= 10 && random((int)round(control.power_state)) == 0){
