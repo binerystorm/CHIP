@@ -73,7 +73,7 @@ void loop()
                     trace_pulse(&t);
                     if (!t.pulsing) count--;
                 }else{
-                    if(count <= 5 && random((int)round(control.power_state)) == 0){
+                    if(count <= 10 && random((int)round(control.power_state)) == 0){
                         t.pulsing = true;
                         count++;
                     }
