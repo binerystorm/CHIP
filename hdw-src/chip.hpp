@@ -11,7 +11,7 @@
 
 #include "math.hpp"
 
-#define DATACAP 37
+#define CHIP_DATACAP 37
 #define CHIPCAP 6
 #define WIRECAP 15
 #define GLUE1CAP 6
@@ -29,7 +29,7 @@ typedef CRGB Type;
 typedef struct {
     Type *data;
     size_t len;
-    V2f color_vec;
+    float color_det;
     bool on;
 } Section;
 
@@ -47,11 +47,10 @@ typedef struct {
 void chip_init(Chip *chip, size_t caps[4], Type *data, size_t len);
 //void chip_fill_colors(Chip *chip);
 // void lerp_update(const V2f *target, Section *sec, float co);
-void sec_lerp_update_1d(const float *target, Section *sec, float co);
-void sec_fill(Section *sec);
+void sec_lerp_update(const float target, Section *sec, float co);
+void sec_fill_color(Section *sec, Type color);
 void sec_fill_gradient(Section *sec);
 void sec_clear(Section *sec);
-void sec_lerp_update(const V2f *target, Section *sec, float co);
 Type gradient(float val);
 
 #endif _CHIP_H_

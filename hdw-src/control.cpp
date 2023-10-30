@@ -1,10 +1,10 @@
 #include "control.hpp"
+#include "math.hpp"
 
 Control control_init(int stable_pin, int unstable_pin, int power_pin)
 {
     Control c = {
-        .stable_state = true,
-        .unstable_state = false,
+        .state = STABLE,
         .power_state = 0,
 
         .stable_pin = stable_pin,
@@ -19,15 +19,11 @@ Control control_init(int stable_pin, int unstable_pin, int power_pin)
 
 void control_update(Control *c)
 {
-    bool st = digitalRead(c->stable_pin);
-    bool un = digitalRead(c->unstable_pin);
-    if(st){
-        c->stable_state = true;
-        c->unstable_state = false;
-    }
-    if(un){
-        c->stable_state = false;
-        c->unstable_state = true;
-    }
-    c->power_state = (float) map(analogRead(c->power_pin), 0, 1000, 0, 255);
+    int st = digitalRead(c->stable_pin);
+    int un = digitalRead(c->unstable_pin);
+    c->state = 
+        xor_g((bool)c->state, xor_g((bool)c->state, st) &&
+              xor_g(!(bool)c->state, un)) ?
+                STABLE : UNSTABLE;
+    c->power_state = (float) map(analogRead(c->power_pin), 0, 1023, 0, 255);
 }

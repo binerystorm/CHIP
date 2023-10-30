@@ -14,22 +14,22 @@ void chip_init(Chip *chip, size_t caps[CHIP_ELEMS], Type *data, size_t len)
     chip->chip.data = data + cur;
     cur += caps[0];
     chip->chip.len = caps[0];
-    chip->chip.color_vec = (V2f){0.0f,0.0f};
+    chip->chip.color_det = 0.0f;
     
     chip->glue1.data = data + cur;
     cur += caps[1];
     chip->glue1.len = caps[1];
-    chip->glue1.color_vec = (V2f){0.0f,0.0f};
+    chip->glue1.color_det = 0.0f;
     
     chip->wire.data = data + cur;
     cur += caps[2];
     chip->wire.len = caps[2];
-    chip->wire.color_vec = (V2f){0.0f,0.0f};
+    chip->wire.color_det = 0.0f;
 
     chip->glue2.data = data + cur;
     cur += caps[3];
     chip->glue2.len = caps[3];
-    chip->glue2.color_vec = (V2f){0.0f,0.0f};
+    chip->glue2.color_det = 0.0f;
 
     // size_t cur = 0;
     // chip->glue1.data = data + cur;
@@ -63,14 +63,10 @@ void chip_init(Chip *chip, size_t caps[CHIP_ELEMS], Type *data, size_t len)
 //        chip->glue2.data[i] = PINK;
 //}
 
-void sec_lerp_update(const V2f *target, Section *sec, float co)
-{
-    V2f_lerp(target, &(sec->color_vec), co);
-}
 
-void sec_lerp_update_1d(const float *target, Section *sec, float co)
+void sec_lerp_update(const float target, Section *sec, float co)
 {
-    float_lerp(target, &sec->color_vec.x, co);
+    sec->color_det = float_lerp(target, sec->color_det, co);
 }
 
 void sec_clear(Section *sec)
@@ -84,15 +80,16 @@ void sec_clear(Section *sec)
 void sec_fill_gradient(Section *sec)
 {
     for(int i = 0; i < sec->len; i++) {
-        sec->data[i] = gradient(sec->color_vec.x);
+        sec->data[i] = gradient(sec->color_det);
     }
 
 }
 
-void sec_fill(Section *sec)
+
+void sec_fill_color(Section *sec, Type color)
 {
     for(int i = 0; i < sec->len; i++) {
-        sec->data[i] = Gen_Color(sec->color_vec.x, sec->color_vec.y, sec->color_vec.y);
+        sec->data[i] = color;
     }
 }
 

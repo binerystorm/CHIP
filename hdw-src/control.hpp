@@ -3,9 +3,13 @@
 #ifndef _CONTROL_H_
 #define _CONTROL_H_
 
+typedef enum {
+    UNSTABLE = 0,
+    STABLE
+} DeviceState;
+
 typedef struct {
-    bool stable_state;
-    bool unstable_state;
+    DeviceState state;
     float power_state;
 
     const int stable_pin;
@@ -16,4 +20,4 @@ typedef struct {
 Control control_init(int stable_pin, int unstabel_pin, int power_pin);
 void control_update(Control *c);
 
-#endif _CONTROL_H_
+#endif // _CONTROL_H_

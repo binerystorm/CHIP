@@ -17,7 +17,7 @@ void circuit_init(Trace *traces, const size_t *lens, const size_t n, Type *data)
             .start = cur,
             .end = cur + current_len,
             .pulse = pulse_init(cur, (current_len > PULSE_LEN) ? PULSE_LEN : current_len),
-            .pulsing = true,
+            .pulsing = false,
         };
         cur += current_len;
     }

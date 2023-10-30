@@ -7,6 +7,11 @@ int16_t clamp(const int16_t v, const int min, const int max)
     else return v;
 }
 
+bool xor_g(bool a, bool b)
+{
+    return !(a && b) && (a || b);
+}
+
 int g_max(int a, int b, int c)
 {
     a = (a > b) ? a : b;
@@ -25,10 +30,12 @@ void V2f_lerp(const V2f *v1, V2f *v2, float co)
     }
 }
 
-void float_lerp(const float *f1, float *f2, float co)
+float float_lerp(const float f1, const float f2, float co)
 {
     if(co > 0){
         // pointer is used so that the values stay the same if co is 0
-        *f2 += (*f1 - *f2)/co;
+        return f2 + (f1 - f2)/co;
+    }else{
+        return f2;
     }
 }
