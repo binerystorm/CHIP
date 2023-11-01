@@ -11,6 +11,7 @@ typedef enum {
 typedef struct {
     DeviceState state;
     float power_state;
+    bool state_changed;
 
     const int stable_pin;
     const int unstable_pin;

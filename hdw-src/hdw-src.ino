@@ -33,6 +33,8 @@ void loop()
 {
 
     control_update(&control);
+    if(control.state_changed) chip.broken = false;
+
     if(clock_update(&clk)){
         tick_counter += 1;
         FastLED.show();
@@ -42,7 +44,7 @@ void loop()
         sec_fill_gradient(&chip.chip);
         sec_fill_gradient(&chip.glue1);
         sec_fill_gradient(&chip.glue2);
-        sec_fill_color(&chip.wire, CRGB::Yellow)
+        sec_fill_color(&chip.wire, CRGB::Yellow);
         sec_range_fill_color(&chip.wire, 4, 6, CRGB::Black);
 
         if(tick_counter % 3 == 0){

@@ -23,7 +23,7 @@ typedef enum {
 typedef struct {
     Type *data;
     size_t len;
-    float color_det;
+    float temprature;
     bool on;
 } Section;
 
@@ -32,6 +32,7 @@ typedef struct {
     Section wire;   // red
     Section glue1; // green
     Section glue2; // pink
+    bool broken;
 } Chip;
 
 #define Gen_Color(R, G, B) CRGB(R, G, B)  
