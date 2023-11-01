@@ -19,7 +19,6 @@ size_t tick_counter = 0;
 bool chip_frame_updated = false;
 bool circuit_frame_updated = false;
 uint8_t count = 0;
-// Trace chip_trace = {0};
 
 void setup()
 {
@@ -30,7 +29,6 @@ void setup()
     circuit_init(circuit, trace_lens, TRACE_COUNT, data);
 
 }
-// NOTE: idx 5, count 6
 void loop()
 {
 
@@ -44,25 +42,9 @@ void loop()
         sec_fill_gradient(&chip.chip);
         sec_fill_gradient(&chip.glue1);
         sec_fill_gradient(&chip.glue2);
-        //sec_fill_color(&(chip.wire), CRGB::Yellow);
-        sec_range_fill_color(&chip.wire, 2, 6, CRGB::Yellow);
+        sec_fill_color(&chip.wire, CRGB::Yellow)
+        sec_range_fill_color(&chip.wire, 4, 6, CRGB::Black);
 
-        if(tick_counter % 100 == 0){
-            Serial.print("state: ");
-            Serial.print(control.state);
-            Serial.print(", ");
-            Serial.print(digitalRead(control.stable_pin));
-            Serial.print(", ");
-            Serial.println(digitalRead(control.unstable_pin));
-            // Serial.print("power: ");
-            // Serial.println(control.power_state);
-            // Serial.print("heat: ");
-            // Serial.println(heat);
-            // Serial.println();
-            // Serial.print("color_det: ");
-            // Serial.println(chip.chip.color_det);
-            // Serial.println();
-        }
         if(tick_counter % 3 == 0){
             sec_lerp_update(heat, &chip.chip, 700.0f);
             sec_lerp_update(heat, &chip.glue1, 475.0f);

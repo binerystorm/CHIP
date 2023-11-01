@@ -1,9 +1,4 @@
 #include <Arduino.h>
-//#include <stdlib.h>
-//#include <raylib.h>
-//#include <stdbool.h>
-
-//typedef float g_time_t;
 typedef long g_time_t;
 
 typedef struct{

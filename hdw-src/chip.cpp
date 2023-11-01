@@ -3,12 +3,6 @@
 #define CHIP_ELEMS 4
 void chip_init(Chip *chip, size_t caps[CHIP_ELEMS], Type *data, size_t len)
 {
-    //{
-    //    size_t total = 0;
-    //    for(int i = 0; i < CHIP_ELEMS; i++)
-    //        total += caps[i];
-    //    //assert(total == len);
-    //}
 
     size_t cur = 0;
     chip->chip.data = data + cur;
@@ -31,38 +25,7 @@ void chip_init(Chip *chip, size_t caps[CHIP_ELEMS], Type *data, size_t len)
     chip->glue2.len = caps[3];
     chip->glue2.color_det = 0.0f;
 
-    // size_t cur = 0;
-    // chip->glue1.data = data + cur;
-    // cur += caps[2];
-    // chip->glue1.len = caps[2];
-    // chip->glue1.color_vec = (V2f){0.0f,0.0f};
-    // chip->wire.data = data + cur;
-    // cur += caps[1];
-    // chip->wire.len = caps[1];
-    // chip->wire.color_vec = (V2f){0.0f,0.0f};
-    // chip->chip.data = data + cur;
-    // cur += caps[0];
-    // chip->chip.len = caps[0];
-    // chip->chip.color_vec = (V2f){0.0f,0.0f};
-    // chip->glue2.data = data + cur;
-    // cur += caps[3];
-    // chip->glue2.len = caps[3];
-    // chip->glue2.color_vec = (V2f){0.0f,0.0f};
-
 }
-
-//void chip_fill_colors(Chip *chip)
-//{
-//    for(size_t i = 0; i < chip->glue1.len; i++)
-//        chip->glue1.data[i] = GREEN;
-//    for(size_t i = 0; i < chip->wire.len; i++)
-//        chip->wire.data[i] = RED;
-//    for(size_t i = 0; i < chip->chip.len; i++)
-//        chip->chip.data[i] = BLUE;
-//    for(size_t i = 0; i < chip->glue2.len; i++)
-//        chip->glue2.data[i] = PINK;
-//}
-
 
 void sec_lerp_update(const float target, Section *sec, float co)
 {

@@ -3,14 +3,12 @@
 #ifdef SIMULATION
     #include <stdlib.h>
     #include <stdbool.h>
-    // #define on_state true
     #define off_state '.'
     typedef char Type;
 
 #else
     #include <Arduino.h>
     #include <FastLED.h>
-    // #define on_state CRGB::Red
     #define off_state CRGB::Black
     typedef CRGB Type;
 #endif
@@ -28,7 +26,6 @@ typedef struct {
 typedef struct {
     Type *start;
     Type *end;
-    //size_t len;
     Pulse pulse;
     bool pulsing;
 } Trace;
