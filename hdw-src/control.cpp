@@ -28,5 +28,6 @@ void control_update(Control *c)
               xor_g(!(bool)c->state, un)) ?
                 STABLE : UNSTABLE;
     c->state_changed = !(new_state == c->state);
+    c->state = new_state;
     c->power_state = (float) map(analogRead(c->power_pin), 0, 1023, 0, 255);
 }
