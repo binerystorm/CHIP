@@ -29,9 +29,9 @@ typedef struct {
 
 typedef struct {
     Section chip;   // blue
-    Section wire;   // red
     Section glue1; // green
     Section glue2; // pink
+    Section wire;   // red
     bool broken;
 } Chip;
 
@@ -45,5 +45,6 @@ SecRangeErr sec_range_fill_color(Section *sec, size_t start_offset, size_t len, 
 void sec_fill_gradient(Section *sec);
 void sec_clear(Section *sec);
 Type gradient(float val);
+void chip_animate(Chip *chip, int16_t heat);
 
 #endif _CHIP_H_

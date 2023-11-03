@@ -141,8 +141,11 @@ int main()
             speed.y = HYPER(speed.x);
         }
         lerp_mov_fun(&speed, &color, 25.0f);
-        lerp_mov_fun(&speed, &color1, 50.0f);
-        lerp_mov_fun(&speed, &color2, 75.0f);
+        lerp_mov_fun(&color, &color1, 25.0f);
+        lerp_mov_fun(&color1, &color2, 25.0f);
+        // lerp_mov_fun(&speed, &color, 25.0f);
+        // lerp_mov_fun(&speed, &color1, 50.0f);
+        // lerp_mov_fun(&speed, &color2, 75.0f);
         BeginDrawing();
             ClearBackground(BLACK);
             draw_bg((V2){1, 1});

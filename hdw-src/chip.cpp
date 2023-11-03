@@ -42,22 +42,52 @@ void chip_reset(Chip *chip)
     chip->wire.temprature = 0;
     chip->glue1.temprature = 0;
     chip->glue2.temprature = 0;
+    chip->chip.on = true;
+    chip->wire.on = true;
+    chip->glue1.on = true;
+    chip->glue2.on = true;
 }
 
 void chip_animate(Chip *chip, int16_t heat)
 {
+    // Section *secs = (Section*) chip; 
+
+    Section *secs[3] = {&(chip->chip), &(chip->glue1), &(chip->glue2), };
+    const uint8_t fault_point = 175;
     if (chip->broken)
         return;
     
-    if (chip->chip.temprature >= 254){
+    if (chip->chip.temprature >= 230){
         chip->broken = true;
         chip_reset(chip);
         chip_fill_color(chip, CRGB::Black);
+        return;
     }
 
-    sec_lerp_update(heat, &chip->chip, 700.0f);
-    sec_lerp_update(heat, &chip->glue1, 475.0f);
-    sec_lerp_update(heat, &chip->glue2, 115.0f);
+    sec_lerp_update(heat, &chip->glue2, 215.0f);
+    sec_lerp_update(chip->glue2.temprature, &chip->glue1, 215.0f);
+    sec_lerp_update(chip->glue1.temprature, &chip->chip, 215.0f);
+    // sec_lerp_update(heat, &chip->chip, 700.0f);
+    // sec_lerp_update(heat, &chip->glue1, 475.0f);
+    // sec_lerp_update(heat, &chip->glue2, 215.0f);
+
+    if (heat > fault_point){
+        for(auto &sec : secs){
+            const uint32_t range = 250 - (uint32_t)fault_point;
+            if(fault_point < sec->temprature)
+            {
+                uint32_t c = random(range);
+                uint32_t distrobution = (uint32_t)roundf(pow((sec->temprature - fault_point)/28.2405947284, 4));
+                sec->on = !(c < distrobution);
+            }
+        }
+    }
+
+    for(auto &sec : secs)
+        sec->on ? sec_fill_gradient(sec) : sec_fill_color(sec, CRGB::Black);
+
+    sec_fill_color(&(chip->wire), CRGB::Yellow);
+    sec_range_fill_color(&(chip->wire), 4, 6, CRGB::Black);
 }
 
 void sec_lerp_update(const float target, Section *sec, float co)

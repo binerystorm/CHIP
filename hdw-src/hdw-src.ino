@@ -41,16 +41,8 @@ void loop()
         int16_t heat = clamp(map(control.power_state, 0, 255, 255, 0),
                              0, 255 - (control.state * 125));
 
-        sec_fill_gradient(&chip.chip);
-        sec_fill_gradient(&chip.glue1);
-        sec_fill_gradient(&chip.glue2);
-        sec_fill_color(&chip.wire, CRGB::Yellow);
-        sec_range_fill_color(&chip.wire, 4, 6, CRGB::Black);
-
         if(tick_counter % 3 == 0){
-            sec_lerp_update(heat, &chip.chip, 700.0f);
-            sec_lerp_update(heat, &chip.glue1, 475.0f);
-            sec_lerp_update(heat, &chip.glue2, 115.0f);
+            chip_animate(&chip, heat);
         }
         if(tick_counter % 10 == 0){
             for(auto &t : circuit){
