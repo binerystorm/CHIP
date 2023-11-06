@@ -53,11 +53,11 @@ void chip_animate(Chip *chip, int16_t heat)
     // Section *secs = (Section*) chip; 
 
     Section *secs[3] = {&(chip->chip), &(chip->glue1), &(chip->glue2), };
-    const uint8_t fault_point = 175;
+    const uint8_t fault_point = 155;
     if (chip->broken)
         return;
     
-    if (chip->chip.temprature >= 230){
+    if (chip->chip.temprature >= 225){
         chip->broken = true;
         chip_reset(chip);
         chip_fill_color(chip, CRGB::Black);
@@ -73,7 +73,7 @@ void chip_animate(Chip *chip, int16_t heat)
 
     if (heat > fault_point){
         for(auto &sec : secs){
-            const uint32_t range = 250 - (uint32_t)fault_point;
+            const uint32_t range = 255 - (uint32_t)fault_point;
             if(fault_point < sec->temprature)
             {
                 uint32_t c = random(range);
