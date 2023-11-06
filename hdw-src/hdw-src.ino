@@ -33,7 +33,7 @@ void loop()
 {
 
     control_update(&control);
-    if(control.state_changed) chip.broken = false;
+    if(control.button_pressed) chip.broken = false;
 
     if(clock_update(&clk)){
         tick_counter += 1;

@@ -7,6 +7,7 @@ Control control_init(int stable_pin, int unstable_pin, int power_pin)
         .state = STABLE,
         .power_state = 0,
         .state_changed = false,
+        .button_pressed = false,
 
         .stable_pin = stable_pin,
         .unstable_pin = unstable_pin,
@@ -29,5 +30,6 @@ void control_update(Control *c)
                 STABLE : UNSTABLE;
     c->state_changed = !(new_state == c->state);
     c->state = new_state;
+    c->button_pressed = (bool)st || (bool)un;
     c->power_state = (float) map(analogRead(c->power_pin), 0, 1023, 0, 255);
 }

@@ -12,6 +12,7 @@ typedef struct {
     DeviceState state;
     float power_state;
     bool state_changed;
+    bool button_pressed;
 
     const int stable_pin;
     const int unstable_pin;
