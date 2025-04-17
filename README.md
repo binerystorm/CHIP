@@ -1,7 +1,3 @@
-# Test Description
 
-<video width="320" height="240" controls>
-  <source src="./assets/chip_demo.mp4" type="video/mp4">
-</video>
-
+![Video of how the model works](./assets/chip_demo.mp4)
 ![](./assets/chip_model.jpg)
